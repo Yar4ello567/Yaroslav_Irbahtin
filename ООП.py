@@ -29,6 +29,10 @@ class Vehicle(ABC):
     def description(self) -> str:
         pass
 
+    @abstractmethod
+    def check_age(self) -> str:
+        pass
+
     @staticmethod
     def get_static_field() -> str:
         return Vehicle.__static_field
@@ -62,6 +66,14 @@ class Car(Vehicle):
                 f" объем двигателя {self.engine_volume} л,"
                 f" трансмиссия {self.transmission}")
 
+    def check_age(self) -> str:
+        current_year = 2024
+        age = current_year - self.year
+        if age < 5:
+            return f"{self.brand} - новый автомобиль."
+        else:
+            return f"{self.brand} - старый автомобиль."
+
 
 class Truck(Vehicle):
 
@@ -94,6 +106,14 @@ class Truck(Vehicle):
             return (f"Грузовой автомобиль {self.brand} {self.year} года,"
                     f" грузоподъемность {self.carrying_capacity} кг, без прицепа")
 
+    def check_age(self) -> str:
+        current_year = 2024
+        age = current_year - self.year
+        if age < 10:
+            return f"{self.brand} - новый автомобиль."
+        else:
+            return f"{self.brand} - старый автомобиль."
+
 
 class HybridCar(Car):
 
@@ -115,14 +135,23 @@ class HybridCar(Car):
                 f" трансмиссия {self.transmission},"
                 f" емкость батареи {self.battery_capacity} кВт*ч")
 
+    def check_age(self) -> str:
+        current_year = 2024
+        age = current_year - self.year
+        if age < 8:
+            return f"{self.brand} - новый автомобиль."
+        else:
+            return f"{self.brand} - старый автомобиль."
+
 
 vehicles = [
-    Car("Toyota", 2020, 2.0, "automatic"),
-    Truck("MAN", 2015, 5000, True),
-    HybridCar("Nissan", 2022, 2.5, "automatic", 75)
+    Car("Toyota", 2020, 2.0, "автоматическая"),
+    Truck("MAN", 2011, 5000, True),
+    HybridCar("Nissan", 2022, 1.2, "вариатор", 75)
 ]
 
 for vehicle in vehicles:
     print(vehicle.description())
+    print(vehicle.check_age())
 
 print(Vehicle.get_static_field())
