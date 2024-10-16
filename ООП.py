@@ -13,9 +13,17 @@ class Vehicle(ABC):
     def brand(self) -> str:
         return self.__brand
 
+    @brand.setter
+    def brand(self, value: str) -> None:
+        self.__brand = value
+
     @property
     def year(self) -> int:
         return self._year
+
+    @year.setter
+    def year(self, value: int) -> None:
+        self._year = value
 
     @abstractmethod
     def description(self) -> str:
@@ -37,12 +45,22 @@ class Car(Vehicle):
     def engine_volume(self) -> float:
         return self._engine_volume
 
+    @engine_volume.setter
+    def engine_volume(self, value: float) -> None:
+        self._engine_volume = value
+
     @property
     def transmission(self) -> str:
         return self._transmission
 
+    @transmission.setter
+    def transmission(self, value: str) -> None:
+        self._transmission = value
+
     def description(self) -> str:
-        return f"Легковой автомобиль {self.brand} {self.year} года, объем двигателя {self.engine_volume} л, трансмиссия {self.transmission}"
+        return (f"Легковой автомобиль {self.brand} {self.year} года,"
+                f" объем двигателя {self.engine_volume} л,"
+                f" трансмиссия {self.transmission}")
 
 
 class Truck(Vehicle):
@@ -56,15 +74,25 @@ class Truck(Vehicle):
     def carrying_capacity(self) -> int:
         return self._carrying_capacity
 
+    @carrying_capacity.setter
+    def carrying_capacity(self, value: int) -> None:
+        self._carrying_capacity = value
+
     @property
     def trailer_presence(self) -> bool:
         return self._trailer_presence
 
+    @trailer_presence.setter
+    def trailer_presence(self, value: bool) -> None:
+        self._trailer_presence = value
+
     def description(self) -> str:
         if self.trailer_presence:
-            return f"Грузовой автомобиль {self.brand} {self.year} года, грузоподъемность {self.carrying_capacity} кг, с прицепом"
+            return (f"Грузовой автомобиль {self.brand} {self.year} года,"
+                    f" грузоподъемность {self.carrying_capacity} кг, с прицепом")
         else:
-            return f"Грузовой автомобиль {self.brand} {self.year} года, грузоподъемность {self.carrying_capacity} кг, без прицепа"
+            return (f"Грузовой автомобиль {self.brand} {self.year} года,"
+                    f" грузоподъемность {self.carrying_capacity} кг, без прицепа")
 
 
 class HybridCar(Car):
@@ -77,8 +105,15 @@ class HybridCar(Car):
     def battery_capacity(self) -> float:
         return self._battery_capacity
 
+    @battery_capacity.setter
+    def battery_capacity(self, value: float) -> None:
+        self._battery_capacity = value
+
     def description(self) -> str:
-        return f"Гибридлный автомобиль {self.brand} {self.year} года, объем двигателя {self.engine_volume} л, трансмиссия {self.transmission}, емкость батареи {self.battery_capacity} кВт*ч"
+        return (f"Гибридлный автомобиль {self.brand} {self.year} года,"
+                f" объем двигателя {self.engine_volume} л,"
+                f" трансмиссия {self.transmission},"
+                f" емкость батареи {self.battery_capacity} кВт*ч")
 
 
 vehicles = [
