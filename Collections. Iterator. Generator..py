@@ -1,22 +1,29 @@
 import json
 import csv
 
-
-def filter_users(json_file, csv_file):
+def read(json_file):
     with open(json_file, 'r') as f:
         users = json.load(f)
+    return users
 
-    filtered_users = (
+def filters(users):
+    return [
         user for user in users
-        if (user.get('phoneNumber', '').startswith('+1') or user.get('phoneNumber', '').startswith('1'))
+        if (user.get('phoneNumber', '').startswith('+1')
+        or user.get('phoneNumber', '').startswith('1'))
         and '4.0 Safari' in user.get('userAgent', '')
-    )
+    ]
 
+def write(filtered_users, csv_file):
     with open(csv_file, 'w', newline='') as f:
         writer = csv.writer(f)
-
-        for user in  filtered_users:
+        writer.writerow(['Name', 'Address', 'Email'])
+        for user in filtered_users:
             writer.writerow([user.get('name'), user.get('address'), user.get('email')])
 
+def main(json_file, csv_file):
+    users = read(json_file)
+    filtered_users = filters(users)
+    write(filtered_users, csv_file)
 
-filter_users('in.json', 'output.csv')
+main('in.json', 'output.csv')
