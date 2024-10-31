@@ -4,7 +4,7 @@ import os
 from typing import List, Dict, Any
 
 
-def read(json_file: str) -> List[Dict[str, Any]]:
+def read_json_file(json_file: str) -> List[Dict[str, Any]]:
     if not os.path.exists(json_file):
         raise FileNotFoundError(f"The file does not exist.")
     with open(json_file, 'r') as f:
@@ -12,7 +12,7 @@ def read(json_file: str) -> List[Dict[str, Any]]:
     return users
 
 
-def filters(users: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+def filter_users(users: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
     return [
         user for user in users
         if (user.get('phoneNumber', '').startswith('+1') or
@@ -21,7 +21,7 @@ def filters(users: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
     ]
 
 
-def write(filtered_users: List[Dict[str, Any]], csv_file: str) -> None:
+def write_csv_file(filtered_users: List[Dict[str, Any]], csv_file: str) -> None:
     with open(csv_file, 'w', newline='') as f:
         writer = csv.writer(f)
         writer.writerow(['Name', 'Address', 'Email'])
@@ -35,9 +35,9 @@ def write(filtered_users: List[Dict[str, Any]], csv_file: str) -> None:
 
 def main(json_file: str, csv_file: str) -> None:
     try:
-        users = read(json_file)
-        filtered_users = filters(users)
-        write(filtered_users, csv_file)
+        users = read_json_file(json_file)
+        filtered_users = filter_users(users)
+        write_csv_file(filtered_users, csv_file)
     except FileNotFoundError as e:
         print(e)
 
