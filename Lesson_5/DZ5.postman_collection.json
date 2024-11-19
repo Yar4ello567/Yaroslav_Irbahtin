@@ -1,0 +1,147 @@
+{
+	"info": {
+		"_postman_id": "4ada1d6e-b6f4-41c8-b413-9d83571040fc",
+		"name": "DZ5",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39852096"
+	},
+	"item": [
+		{
+			"name": "zadanie_1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonPet = pm.response.json();\r",
+							"pm.environment.set(\"petID\", jsonPet.id);\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function() {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 0,\r\n  \"category\": {\r\n    \"id\": 0,\r\n    \"name\": \"string\"\r\n  },\r\n  \"name\": \"Пуширка\",\r\n  \"photoUrls\": [\r\n    \"string\"\r\n  ],\r\n  \"tags\": [\r\n    {\r\n      \"id\": 0,\r\n      \"name\": \"string\"\r\n    }\r\n  ],\r\n  \"status\": \"available\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL_1}}{{URL_2}}pet",
+					"host": [
+						"{{URL_1}}{{URL_2}}pet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "zadanie_2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 9223372036854750903,\r\n  \"category\": {\r\n    \"id\": 0,\r\n    \"name\": \"string\"\r\n  },\r\n  \"name\": \"Пушара\",\r\n  \"photoUrls\": [\r\n    \"string\"\r\n  ],\r\n  \"tags\": [\r\n    {\r\n      \"id\": 0,\r\n      \"name\": \"string\"\r\n    }\r\n  ],\r\n  \"status\": \"ivailable\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL_1}}{{URL_2}}pet",
+					"host": [
+						"{{URL_1}}{{URL_2}}pet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "zadanie_1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL_1}}{{URL_2}}pet/{{petID}}",
+					"host": [
+						"{{URL_1}}{{URL_2}}pet"
+					],
+					"path": [
+						"{{petID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "zadanie_3",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "additionalMetadata",
+							"value": "image",
+							"type": "text"
+						},
+						{
+							"key": "file",
+							"type": "file",
+							"src": "scale_1200.png"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{URL_1}}{{URL_2}}pet/{{petID}}/uploadImage",
+					"host": [
+						"{{URL_1}}{{URL_2}}pet"
+					],
+					"path": [
+						"{{petID}}",
+						"uploadImage"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
